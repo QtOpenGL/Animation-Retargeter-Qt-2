@@ -1,0 +1,5 @@
+loader retarget dialog - http://doc.qt.io/qt-5/qtwidgets-dialogs-configdialog-example.html
+			http://doc.qt.io/qt-5/qtwidgets-dialogs-findfiles-example.html
+			http://doc.qt.io/qt-5/qtwidgets-layouts-dynamiclayouts-example.html
+
+camera - use the one that is in the original project. It's based on Jamie's camera.

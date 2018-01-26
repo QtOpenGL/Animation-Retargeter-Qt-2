@@ -1,0 +1,107 @@
+shoppinglist of components that we need for the retargeter:
+
+1. top bar with *
+	-animation*
+		-play
+		-bindpose
+		-hide
+	-view*
+		-retarget panel
+	-file*
+		-retarget from
+		-retarget to
+	- a system that keeps track of all these switches
+
+
+2. load retarget from dialog *
+	-model path entry and find *
+	-texture path entry and find *
+	-animation path entry and find *
+	-will have to have it's warning system for invalid formats e.c.t *
+
+3. load retarget to dialog with *
+	-model path entry and find *
+	-texture path entry and find *
+	-will have to have it's warning system for invalid formats e.c.t *
+
+
+4. retarget dialog with regenerating buttons *
+	~ config dialog looks really good. Might use that instead *
+	-label on the left *
+	-drop down center *
+	-checklist if root on the right *
+	-apply button at the bottom *
+	-scroll list *
+
+5. an opengl window that provides the graphics context for rendering *
+	-surfaces error dialogs when things go wrong *
+	-should be able to handle looping	*
+	-handles shaders	*
+	-handles textures	*
+
+6. a camera class that allows the user to navigate around the world *
+	- keypresses to be logged also *
+
+7. retargeter class that actually handles the retargeting of the animation
+	-will have to have it's warning system for invalid formats e.c.t
+
+8. model loader class that handles the loading of the md5 models
+	-will have to have it's warning system for invalid formats e.c.t
+
+9. animated entity
+	-that can be rendered
+	-that can play its own animations
+	-that can pause its own animations
+	-that can have its animations set
+	-can be set to bind pose/has a state
+	-can be hidden and shown
+	-make sure the collision model is not rendered
+	-should be able to rotate
+	-should be able to translate
+	-contains all the data needed by the renderer to render the entity
+
+10. rendering engine
+	-takes animated entities and draws them with textures
+
+11. a system that keeps track of all these switches button clicks that the user does
+
+12. a system for shutting down the application and deleting everything / a memory management system (probably a factory)
+
+13. a system for ensuring that when the window is resized that things arent being messed with
+
+14. an init system that starts everything up
+
+15. a texture loader
+	-loads .tga textures into memory
+	-stores them in a way that the draw engine can use easily
+
+16. an anim loader
+	-loads md5animations
+	-will have to have it's warning system for invalid formats e.c.t
+
+17. model
+	-holds the data for a 3d model that can be rendered to the screen
+
+18. anim
+	-holds data for a 3d animation
+
+19. skeleton
+	-holds the data for a skeleton of a 3d animation
+
+20. a glsl shader system
+	-able to use multiple shaders for different materials
+
+21. a material system
+
+22. a timer and render loop that works with the GUI system
+
+23. a switch system that holds what has currently been toggled and what has not
+
+
+————————————————
+
+ok so I feel I should start with projects that are most like my project.
+
+-  qt graphics project with a render loop, controls, shader system, textures, opengl context.
+-	game engine projects
+

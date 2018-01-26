@@ -1,0 +1,120 @@
+The QOpenGLWidget Class:
+==========================
+
+we have 3 functions-
+---------------------
+1.paintGL() - Renders the OpenGL scene. Gets called whenever the widget needs to be updated.
+2.resizeGL() - Sets up the OpenGL viewport, projection, etc. Gets called whenever the widget has been resized (and also when it is shown for the first time because all newly created widgets get a resize event automatically).
+3.initializeGL() - Sets up the OpenGL resources and state. Gets called once before the first time resizeGL() or paintGL() is called.
+
+we also have QOpenGLFunctions-
+------------------------------
+*this makes sure that your opengl calls are cross platform which is pretty neat. prefixing of each and every OpenGL call can be avoided by deriving from QOpenGLFunctions instead:
+
+class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions
+{
+    ...
+    void initializeGL()
+    {
+        initializeOpenGLFunctions();
+        glClearColor(...);
+        ...
+    }
+    ...
+};
+
+Looping-
+----------
+*If you need to trigger a repaint from places other than paintGL() (a typical example is when using timers to animate scenes), you should call the widget's update() function to schedule an update.
+
+Rendering-
+--------------
+As described above, subclass QOpenGLWidget to render pure 3D content in the following way:
+
+Reimplement the initializeGL() and resizeGL() functions to set up the OpenGL state and provide a perspective transformation.
+Reimplement paintGL() to paint the 3D scene, calling only OpenGL functions.
+
+
+Resource Initialization and Cleanup-
+-----------------------------------
+The QOpenGLWidget's associated OpenGL context is guaranteed to be current whenever initializeGL() and paintGL() are invoked. Do not attempt to create OpenGL resources before initializeGL() is called.
+
+These operations must be deferred to initializeGL().
+
+When in doubt, make the member variable a pointer and create and destroy the instance dynamically in initializeGL() and the destructor, respectively.
+
+Releasing the resources also needs the context to be current. Therefore destructors that perform such cleanup are expected to call makeCurrent() before moving on to destroy any OpenGL resources or wrappers.
+
+class MyGLWidget : public QOpenGLWidget
+{
+    ...
+
+private:
+    QOpenGLVertexArrayObject m_vao;
+    QOpenGLBuffer m_vbo;
+    QOpenGLShaderProgram *m_program;
+    QOpenGLShader *m_shader;
+    QOpenGLTexture *m_texture;
+};
+
+MyGLWidget::MyGLWidget()
+    : m_program(0), m_shader(0), m_texture(0)
+{
+    // No OpenGL resource initialization is done here.
+}
+
+MyGLWidget::~MyGLWidget()
+{
+    // Make sure the context is current and then explicitly
+    // destroy all underlying OpenGL resources.
+    makeCurrent();
+
+    delete m_texture;
+    delete m_shader;
+    delete m_program;
+
+    m_vbo.destroy();
+    m_vao.destroy();
+
+    doneCurrent();
+}
+
+void MyGLWidget::initializeGL()
+{
+    m_vao.create();
+    if (m_vao.isCreated())
+        m_vao.bind();
+
+    m_vbo.create();
+    m_vbo.bind();
+    m_vbo.allocate(...);
+
+    m_texture = new QOpenGLTexture(QImage(...));
+
+    m_shader = new QOpenGLShader(...);
+    m_program = new QOpenGLShaderProgram(...);
+
+    ...
+}
+
+This is naturally not the only possible solution. One alternative is to use the aboutToBeDestroyed() signal of QOpenGLContext. By connecting a slot, using direct connection, to this signal, it is possible to perform cleanup whenever the the underlying native context handle, or the entire QOpenGLContext instance, is going to be released. The following snippet is in principal equivalent to the previous one:
+
+void MyGLWidget::initializeGL()
+{
+    // context() and QOpenGLContext::currentContext() are equivalent when called from initializeGL or paintGL.
+    connect(context(), &QOpenGLContext::aboutToBeDestroyed, this, &MyGLWidget::cleanup);
+}
+
+void MyGLWidget::cleanup()
+{
+    makeCurrent();
+    delete m_texture;
+    m_texture = 0;
+    ...
+    doneCurrent();
+}
+
+Note: For widgets that change their associated top-level window multiple times during their lifetime, a combined approach is essential. We're not doing that but I think it's worth putting in?
+
+
+

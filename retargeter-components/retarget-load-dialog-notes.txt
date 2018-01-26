@@ -1,0 +1,20 @@
+Notes on the Retarget/Load Dialog
+---------------------------------
+
+basically going to use the config dialog example and create multiple pages for loading the 'to' and 'from'
+
+use the config dialog example
+load file dialog example 
+dynamic layouts dialog example
+
+
+Scroll area:
+
+QLabel *imageLabel = new QLabel;
+QImage image("happyguy.png");
+imageLabel->setPixmap(QPixmap::fromImage(image));
+
+scrollArea = new QScrollArea;
+scrollArea->setBackgroundRole(QPalette::Dark);
+scrollArea->setWidget(imageLabel);
+

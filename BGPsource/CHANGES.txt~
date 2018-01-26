@@ -1,0 +1,7 @@
+Beginning OpenGL Game Programming 2nd Edition Source Examples
+
+This package contains various fixes to problems which became apparent after release of the above book. Specifically:
+
+ * The VC++ and Code::Blocks project files were broken in the initial print run. This package includes new project files.
+ * An incorrect size was passed to glGetShaderInfoLog causing any log output to be truncated. 
+ * Since release, certain drivers (specifically AMD) started requiring precision qualifiers in the fragment shader causing the examples to fail while compiling the shader. All shaders are now fixed and an accompanying document gives a brief explanation of the issue.

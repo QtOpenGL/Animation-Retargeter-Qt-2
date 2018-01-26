@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+<CodeBlocks_project_file>
+    <FileVersion major="1" minor="6"/>
+    <Project>
+        <Option title="simple"/>
+        <Option pch_mode="2"/>
+        <Option compiler="gcc"/>
+        <Build>
+            <Target title="Debug">
+                <Option extension_auto="1" output="../simple_debug" prefix_auto="1"/>
+                <Option working_dir="../"/>
+                <Option object_output="obj/Debug/"/>
+                <Option type="1"/>
+                <Option compiler="gcc"/>
+                <Compiler>
+                    <Add option="-g"/>
+                </Compiler>
+            </Target>
+            <Target title="Release">
+                <Option extension_auto="1" output="../simple_release" prefix_auto="1"/>
+                <Option working_dir="../"/>
+                <Option object_output="obj/Release/"/>
+                <Option type="1"/>
+                <Option compiler="gcc"/>
+                <Compiler>
+                    <Add option="-O2"/>
+                </Compiler>
+                <Linker>
+                    <Add option="-s"/>
+                </Linker>
+            </Target>
+        </Build>
+        <Compiler>
+            <Add option="-Wall"/>
+        </Compiler>
+        <Linker>
+            <Add library="libGL.a"/>
+            <Add library="libGLU.a"/>
+            <Add library="libXxf86vm.a"/>
+        </Linker>
+        <Unit filename="../src/main.cpp"/>
+        <Unit filename="../src/SDL/begin_code.h"/>
+        <Unit filename="../src/SDL/close_code.h"/>
+        <Unit filename="../src/SDL/SDL.h"/>
+        <Unit filename="../src/SDL/SDL_active.h"/>
+        <Unit filename="../src/SDL/SDL_audio.h"/>
+        <Unit filename="../src/SDL/SDL_byteorder.h"/>
+        <Unit filename="../src/SDL/SDL_cdrom.h"/>
+        <Unit filename="../src/SDL/SDL_config.h"/>
+        <Unit filename="../src/SDL/SDL_config_amiga.h"/>
+        <Unit filename="../src/SDL/SDL_config_dreamcast.h"/>
+        <Unit filename="../src/SDL/SDL_config_macos.h"/>
+        <Unit filename="../src/SDL/SDL_config_macosx.h"/>
+        <Unit filename="../src/SDL/SDL_config_minimal.h"/>
+        <Unit filename="../src/SDL/SDL_config_nds.h"/>
+        <Unit filename="../src/SDL/SDL_config_os2.h"/>
+        <Unit filename="../src/SDL/SDL_config_symbian.h"/>
+        <Unit filename="../src/SDL/SDL_config_win32.h"/>
+        <Unit filename="../src/SDL/SDL_copying.h"/>
+        <Unit filename="../src/SDL/SDL_cpuinfo.h"/>
+        <Unit filename="../src/SDL/SDL_endian.h"/>
+        <Unit filename="../src/SDL/SDL_error.h"/>
+        <Unit filename="../src/SDL/SDL_events.h"/>
+        <Unit filename="../src/SDL/SDL_getenv.h"/>
+        <Unit filename="../src/SDL/SDL_joystick.h"/>
+        <Unit filename="../src/SDL/SDL_keyboard.h"/>
+        <Unit filename="../src/SDL/SDL_keysym.h"/>
+        <Unit filename="../src/SDL/SDL_loadso.h"/>
+        <Unit filename="../src/SDL/SDL_main.h"/>
+        <Unit filename="../src/SDL/SDL_mouse.h"/>
+        <Unit filename="../src/SDL/SDL_mutex.h"/>
+        <Unit filename="../src/SDL/SDL_name.h"/>
+        <Unit filename="../src/SDL/SDL_opengl.h"/>
+        <Unit filename="../src/SDL/SDL_platform.h"/>
+        <Unit filename="../src/SDL/SDL_quit.h"/>
+        <Unit filename="../src/SDL/SDL_rwops.h"/>
+        <Unit filename="../src/SDL/SDL_stdinc.h"/>
+        <Unit filename="../src/SDL/SDL_syswm.h"/>
+        <Unit filename="../src/SDL/SDL_thread.h"/>
+        <Unit filename="../src/SDL/SDL_timer.h"/>
+        <Unit filename="../src/SDL/SDL_types.h"/>
+        <Unit filename="../src/SDL/SDL_version.h"/>
+        <Unit filename="../src/SDL/SDL_video.h"/>
+    </Project>
+</CodeBlocks_project_file>

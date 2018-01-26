@@ -1,0 +1,91 @@
+Notes on the Qt gui library-
+---------------------------
+
+QtCore, a base library that provides containers, thread management, event management, and much more
+
+QtGui and QtWidgets, a GUI toolkit for Desktop, that provides a lot of graphical components to design applications.
+
+A .pro file is written to describe the project to compile
+A makefile is generated using qmake
+The program is build using make (or nmake or jom on windows)
+
+
+The minimal source code of a Qt application is
+
+#include <QApplication>
+
+int main(int argc, char **argv)
+{
+ QApplication app (argc, argv);
+ return app.exec();
+}
+
+QApplication is a very important class. It takes care of input arguments, but also a lot of other things, and most notably, the event loop. The event loop is a loop that waits for user input in GUI applications.
+
+
+Qt class heirarchy
+------------------
+
+Qt widely uses inheritance, especially in the Widgets module
+
+QObject is the most basic class in Qt. Most of classes in Qt inherit from this class
+
+object name : you can set a name, as a string, to an object and search for objects by names.
+parenting system (described in the following section)
+signals and slots (described in the next chapter)
+event management
+
+Remark : in Qt, a widget can also be a window. In the previous section, we displayed a button that is a widget, but it appears directly as a window. There is no need for a "QWindow" class.
+
+
+Parenting System
+----------------
+Any object that inherits from QObject can have a parent and children. 
+
+When an object is destroyed, all of its children are destroyed as well. So, calling delete becomes optional in certain cases.
+All QObjects have findChild and findChildren methods that can be used to search for children of a given object.
+Child widgets in a QWidget automatically appear inside the parent widget.
+
+#include <QApplication>
+#include <QPushButton>
+
+int main(int argc, char **argv)
+{
+ QApplication app (argc, argv);
+
+ QWidget window;
+ window.setFixedSize(100, 50);
+
+ QPushButton *button = new QPushButton("Hello World", &window);
+ button->setGeometry(10, 10, 80, 30);
+
+ window.show();
+ return app.exec();
+}
+
+
+Signals and Slots
+-----------------
+Instead of having observable objects and observers, and registering them, Qt provides two high level concepts: signals and slots.
+
+A signal is a message that an object can send, most of the time to inform of a status change.
+A slot is a function that is used to accept and respond to a signal.
+
+It can also be used communicate information. 
+
+QObject::connect(manager, SIGNAL (tick(int)), progress, SLOT (setValue(int)));
+
+A signal can be connected to several slots
+Many signals can be connected to a slot
+A signal can be connected to a signal: it is signal relaying. The second signal is sent if the first signal is sent.
+
+
+Macros:
+-------
+The most important macro is Q_OBJECT. Signal-Slot connections and their syntax cannot be interpreted by a regular C++ compiler.
+
+the MOC takes the connect() function for signals and slots and generates regualr C++ from it
+
+SIGNAL and SLOT are also two very important and useful macros. When a signal is emitted, the meta-object system is used to compare the signature of the signal, to check the connection, and to find the slot using it's signature. These macros are actually used to convert the provided method signature into a string that matches the one stored in the meta-object.
+
+

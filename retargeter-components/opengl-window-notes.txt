@@ -1,0 +1,11 @@
+OpenGLWindow Notes-
+
+Use OpenGLWindow::setAnimating(true) for render() to be called at the vertical refresh rate, assuming vertical sync is enabled in the underlying OpenGL drivers.
+
+This is a slot so it can be connected to a QTimer::timeout() signal to perform animation. Note however that in the modern OpenGL world it is a much better choice to rely on synchronization to the vertical refresh rate of the display
+
+
+Use QElapsedTimer instead of manually calculating time intervals. Why re-invent the wheel.
+
+
+V-sync is hard ;) -> lets not go for vertical refresh at the moment

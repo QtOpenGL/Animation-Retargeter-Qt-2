@@ -1,0 +1,8 @@
+Render and Message Loop Notes
+-----------------------------
+
+QOpenGLWindow animation may just work with:
+
+1. a QMainWindow application and QOpenGLWindow child. Link the slots and signals. OpenGlWindow has its own loop
+2. a QWindow parent with buttons and QOpenGLWindow child. Link the slots and signals. OpenGLWindow has its own loop
+3. a QMainWindow application and QOpenGlWidget child. Create a render loop on QMainWindow.

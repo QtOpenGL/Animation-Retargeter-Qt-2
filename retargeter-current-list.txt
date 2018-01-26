@@ -1,0 +1,1 @@
+surfaces error dialogs when things go wrong
